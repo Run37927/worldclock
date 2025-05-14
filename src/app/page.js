@@ -82,7 +82,34 @@ export default function WorldTimePage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <main className="container mx-auto px-8 py-12">
+      <header className="pt-8">
+        <div className="container mx-auto px-8">
+          <div className="flex items-center justify-center gap-10">
+            <h1 className="text-4xl font-bold text-gray-900">My Time</h1>
+            <div className="text-right">
+              <p className="text-2xl text-gray-600">
+                {new Intl.DateTimeFormat("en-US", {
+                  hour: "numeric",
+                  minute: "numeric",
+                  hour12: true,
+                  timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+                }).format(currentTime)}
+              </p>
+              <p className="text-gray-500 mt-1">
+                {new Intl.DateTimeFormat("en-US", {
+                  weekday: "long",
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                  timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+                }).format(currentTime)}
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main className="container mx-auto px-8 pt-8 pb-12">
         <DndContext
           sensors={sensors}
           collisionDetection={closestCenter}
