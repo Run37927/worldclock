@@ -1,6 +1,5 @@
 import { Inter, Nunito } from 'next/font/google'
 import "./globals.css";
-import Navbar from '@/components/Navbar';
 import { Toaster } from "@/components/ui/sonner"
 import Providers from '@/components/Providers';
 import { cn, constructMetadata } from '@/lib/utils';
@@ -26,7 +25,6 @@ export default function RootLayout({ children }) {
         <NextTopLoader color="black" showSpinner={false} />
         <Providers>
           <Toaster />
-          <Navbar />
           {children}
         </Providers>
       </body>
