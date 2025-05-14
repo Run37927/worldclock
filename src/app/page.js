@@ -21,7 +21,6 @@ import { CSS } from '@dnd-kit/utilities'
 
 const defaultCities = [
   { name: "Vancouver", country: "Canada", timezone: "America/Vancouver", abbreviation: "PDT", flag: "🇨🇦" },
-  { name: "Toronto", country: "Canada", timezone: "America/Toronto", abbreviation: "EDT", flag: "🇨🇦" },
   { name: "Ottawa", country: "Canada", timezone: "America/Toronto", abbreviation: "EDT", flag: "🇨🇦" },
   { name: "Beijing", country: "China", timezone: "Asia/Shanghai", abbreviation: "CST", flag: "🇨🇳" },
   { name: "Tokyo", country: "Japan", timezone: "Asia/Tokyo", abbreviation: "JST", flag: "🇯🇵" },
@@ -29,6 +28,7 @@ const defaultCities = [
   { name: "Bangkok", country: "Thailand", timezone: "Asia/Bangkok", abbreviation: "ICT", flag: "🇹🇭" },
   { name: "Bali", country: "Indonesia", timezone: "Asia/Makassar", abbreviation: "WITA", flag: "🇮🇩" },
   { name: "Sydney", country: "Australia", timezone: "Australia/Sydney", abbreviation: "AEST", flag: "🇦🇺" },
+  { name: "Ho Chi Minh City", country: "Vietnam", timezone: "Asia/Ho_Chi_Minh", abbreviation: "ICT", flag: "🇻🇳" },
 ]
 
 export default function WorldTimePage() {

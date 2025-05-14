@@ -26,9 +26,8 @@ export const capitalizeFirstLetter = (str) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-// TODO: update this
 export function constructMetadata({
-  title = "",
+  title = "World Clock",
   description = "",
   image = "/",
   icons = "/favicon.ico",
@@ -44,13 +43,6 @@ export function constructMetadata({
       url: "https://www.example.com",
       type: "website",
       images: [{ url: image }]
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [image],
-      creator: "@hairunhuang",
     },
     metadataBase: new URL('https://example.xyz')
   };
