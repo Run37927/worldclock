@@ -24,6 +24,7 @@ const defaultCities = [
   { name: "Ottawa", country: "Canada", timezone: "America/Toronto", abbreviation: "EDT", flag: "🇨🇦" },
   { name: "Beijing", country: "China", timezone: "Asia/Shanghai", abbreviation: "CST", flag: "🇨🇳" },
   { name: "Tokyo", country: "Japan", timezone: "Asia/Tokyo", abbreviation: "JST", flag: "🇯🇵" },
+  { name: "Taipei", country: "Taiwan", timezone: "Asia/Taipei", abbreviation: "CST", flag: "🇹🇼" },
   { name: "Seoul", country: "South Korea", timezone: "Asia/Seoul", abbreviation: "KST", flag: "🇰🇷" },
   { name: "Bangkok", country: "Thailand", timezone: "Asia/Bangkok", abbreviation: "ICT", flag: "🇹🇭" },
   { name: "Bali", country: "Indonesia", timezone: "Asia/Makassar", abbreviation: "WITA", flag: "🇮🇩" },
