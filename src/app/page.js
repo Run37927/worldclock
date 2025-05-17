@@ -81,7 +81,7 @@ export default function WorldTimePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#f8f9fa]">
       <header className="pt-8">
         <div className="container mx-auto px-8">
           <div className="flex items-center justify-center gap-10">
