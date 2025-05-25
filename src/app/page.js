@@ -30,6 +30,7 @@ const defaultCities = [
   { name: "Bali", country: "Indonesia", timezone: "Asia/Makassar", abbreviation: "WITA", flag: "🇮🇩" },
   { name: "Sydney", country: "Australia", timezone: "Australia/Sydney", abbreviation: "AEST", flag: "🇦🇺" },
   { name: "Ho Chi Minh City", country: "Vietnam", timezone: "Asia/Ho_Chi_Minh", abbreviation: "ICT", flag: "🇻🇳" },
+  { name: "Kuala Lumpur", country: "Malaysia", timezone: "Asia/Kuala_Lumpur", abbreviation: "MYT", flag: "🇲🇾" },
 ]
 
 export default function WorldTimePage() {
