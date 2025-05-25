@@ -28,7 +28,7 @@ const defaultCities = [
   { name: "Seoul", country: "South Korea", timezone: "Asia/Seoul", abbreviation: "KST", flag: "🇰🇷" },
   { name: "Bangkok", country: "Thailand", timezone: "Asia/Bangkok", abbreviation: "ICT", flag: "🇹🇭" },
   { name: "Jakarta", country: "Indonesia", timezone: "Asia/Jakarta", abbreviation: "WIB", flag: "🇮🇩" },
-  { name: "Sydney", country: "Australia", timezone: "Australia/Sydney", abbreviation: "AEST", flag: "🇦🇺" },
+  { name: "Manila", country: "Philippines", timezone: "Asia/Manila", abbreviation: "PHT", flag: "🇵🇭" },
   { name: "Ho Chi Minh City", country: "Vietnam", timezone: "Asia/Ho_Chi_Minh", abbreviation: "ICT", flag: "🇻🇳" },
   { name: "Kuala Lumpur", country: "Malaysia", timezone: "Asia/Kuala_Lumpur", abbreviation: "MYT", flag: "🇲🇾" },
 ]
