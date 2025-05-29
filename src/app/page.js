@@ -25,6 +25,33 @@ import { defaultCities } from "@/lib/constant"
 export default function WorldTimePage() {
   const [currentTime, setCurrentTime] = useState(new Date())
   const [cities, setCities] = useState(defaultCities)
+  const [currentLocation, setCurrentLocation] = useState("")
+
+  // Get current location
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          try {
+            const { latitude, longitude } = position.coords
+            const response = await fetch(
+              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=10`
+            )
+            const data = await response.json()
+            if (data.address) {
+              const city = data.address.city || data.address.town || data.address.village || data.address.county
+              setCurrentLocation(city ? `${city}, ` : "")
+            }
+          } catch (error) {
+            console.error("Error getting location:", error)
+          }
+        },
+        (error) => {
+          console.error("Error getting location:", error)
+        }
+      )
+    }
+  }, [])
 
   // Load saved city order from localStorage on mount
   useEffect(() => {
@@ -63,7 +90,7 @@ export default function WorldTimePage() {
         const oldIndex = items.findIndex((item) => item.name === active.id)
         const newIndex = items.findIndex((item) => item.name === over.id)
         const newOrder = arrayMove(items, oldIndex, newIndex)
-        // Save new order to localStorage
+
         localStorage.setItem('cityOrder', JSON.stringify(newOrder.map(city => city.name)))
         return newOrder
       })
@@ -73,38 +100,37 @@ export default function WorldTimePage() {
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
       <header className="pt-8">
-        <div className="max-w-prose mx-auto px-8">
-          <div className="flex items-center justify-center gap-10">
-            <h1 className="text-2xl font-bold text-gray-900">Currently</h1>
-            <div className="flex items-center gap-6">
-              <div className="w-24 h-24">
-                <AnalogClock
-                  value={currentTime}
-                  size={96}
-                  renderNumbers={true}
-                  renderMinuteMarks={true}
-                  renderHourMarks={true}
-                />
-              </div>
-              <div className="text-right">
-                <p className="text-lg text-gray-600">
-                  {new Intl.DateTimeFormat("en-US", {
-                    hour: "numeric",
-                    minute: "numeric",
-                    hour12: true,
-                    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
-                  }).format(currentTime)}
-                </p>
-                <p className="text-gray-500 mt-1 text-sm">
-                  {new Intl.DateTimeFormat("en-US", {
-                    weekday: "long",
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
-                  }).format(currentTime)}
-                </p>
-              </div>
+        <div className="mx-auto">
+          <div className="flex justify-center items-center gap-3">
+            <div className="w-32 h-32">
+              <AnalogClock
+                value={currentTime}
+                size={110}
+                renderNumbers={true}
+                renderMinuteMarks={true}
+                renderHourMarks={true}
+              />
+            </div>
+
+            <div className="text-right">
+              <p className="text-lg text-gray-800">
+                {currentLocation}
+                {new Intl.DateTimeFormat("en-US", {
+                  hour: "numeric",
+                  minute: "numeric",
+                  hour12: true,
+                  timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+                }).format(currentTime)}
+              </p>
+              <p className="text-gray-500 mt-1 text-sm">
+                {new Intl.DateTimeFormat("en-US", {
+                  weekday: "long",
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                  timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+                }).format(currentTime)}
+              </p>
             </div>
           </div>
         </div>
