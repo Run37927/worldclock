@@ -20,32 +20,7 @@ import {
   rectSortingStrategy,
 } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-
-const defaultCities = [
-  { name: "Vancouver", country: "Canada", timezone: "America/Vancouver", abbreviation: "PDT", flag: "🇨🇦" },
-  { name: "Ottawa", country: "Canada", timezone: "America/Toronto", abbreviation: "EDT", flag: "🇨🇦" },
-  { name: "Bangkok", country: "Thailand", timezone: "Asia/Bangkok", abbreviation: "ICT", flag: "🇹🇭" },
-  { name: "Ho Chi Minh City", country: "Vietnam", timezone: "Asia/Ho_Chi_Minh", abbreviation: "ICT", flag: "🇻🇳" },
-  { name: "Kuala Lumpur", country: "Malaysia", timezone: "Asia/Kuala_Lumpur", abbreviation: "MYT", flag: "🇲🇾" },
-  { name: "Singapore", country: "Singapore", timezone: "Asia/Singapore", abbreviation: "SGT", flag: "🇸🇬" },
-  { name: "Jakarta", country: "Indonesia", timezone: "Asia/Jakarta", abbreviation: "WIB", flag: "🇮🇩" },
-  { name: "Manila", country: "Philippines", timezone: "Asia/Manila", abbreviation: "PHT", flag: "🇵🇭" },
-  { name: "Taipei", country: "Taiwan", timezone: "Asia/Taipei", abbreviation: "CST", flag: "🇹🇼" },
-  { name: "Tokyo", country: "Japan", timezone: "Asia/Tokyo", abbreviation: "JST", flag: "🇯🇵" },
-  { name: "Colombo", country: "Sri Lanka", timezone: "Asia/Colombo", abbreviation: "IST", flag: "🇱🇰" },
-  { name: "Dubai", country: "United Arab Emirates", timezone: "Asia/Dubai", abbreviation: "GST", flag: "🇦🇪" },
-  { name: "Amman", country: "Jordan", timezone: "Asia/Amman", abbreviation: "EET", flag: "🇯🇴" },
-  { name: "Beirut", country: "Lebanon", timezone: "Asia/Beirut", abbreviation: "EET", flag: "🇱🇧" },
-  { name: "Istanbul", country: "Turkey", timezone: "Europe/Istanbul", abbreviation: "EET", flag: "🇹🇷" },
-  { name: "Bucharest", country: "Romania", timezone: "Europe/Bucharest", abbreviation: "EET", flag: "🇷🇴" },
-  { name: "Luxembourg", country: "Luxembourg", timezone: "Europe/Luxembourg", abbreviation: "CET", flag: "🇱🇺" },
-  { name: "Nice", country: "France", timezone: "Europe/Paris", abbreviation: "CET", flag: "🇫🇷" },
-  { name: "Barcelona", country: "Spain", timezone: "Europe/Madrid", abbreviation: "CET", flag: "🇪🇸" },
-  { name: "Lisbon", country: "Portugal", timezone: "Europe/Lisbon", abbreviation: "WET", flag: "🇵🇹" },
-  { name: "Casablanca", country: "Morocco", timezone: "Africa/Casablanca", abbreviation: "WET", flag: "🇲🇦" },
-  { name: "London", country: "United Kingdom", timezone: "Europe/London", abbreviation: "BST", flag: "🇬🇧" },
-  { name: "New York", country: "United States", timezone: "America/New_York", abbreviation: "EDT", flag: "🇺🇸" },
-]
+import { defaultCities } from "@/lib/constant"
 
 export default function WorldTimePage() {
   const [currentTime, setCurrentTime] = useState(new Date())
@@ -152,6 +127,7 @@ export default function WorldTimePage() {
                   abbreviation={city.abbreviation}
                   currentTime={currentTime}
                   flag={city.flag}
+                  image={city.image}
                 />
               ))}
             </div>
@@ -162,7 +138,7 @@ export default function WorldTimePage() {
   )
 }
 
-function SortableCityTimeCard({ city, country, timezone, abbreviation, currentTime, flag }) {
+function SortableCityTimeCard({ city, country, timezone, abbreviation, currentTime, flag, image }) {
   const {
     attributes,
     listeners,
@@ -197,33 +173,40 @@ function SortableCityTimeCard({ city, country, timezone, abbreviation, currentTi
       style={style}
       {...attributes}
       {...listeners}
-      className="bg-white rounded-md shadow-sm border border-gray-100 p-6 transition-all hover:shadow-md cursor-move"
+      className="relative bg-white rounded-md shadow-sm border border-gray-100 p-6 transition-all hover:shadow-md cursor-move overflow-hidden"
     >
-      <div className="flex justify-between items-start mb-4">
-        <div>
-          <h2 className="font-semibold text-gray-900">{city}</h2>
-          <p className="text-gray-500 flex items-center gap-1 bg-gray-50 border border-gray-200 rounded-md py-0.5 px-1 text-xs">
-            <span className="">{flag}</span>
-            {country}
-          </p>
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-50"
+        style={{ backgroundImage: `url(${image})` }}
+      />
+      <div className="absolute inset-0 bg-white/5" />
+      <div className="relative z-10">
+        <div className="flex justify-between items-start mb-4">
+          <div>
+            <h2 className="font-semibold text-gray-900">{city}</h2>
+            <p className="text-gray-500 flex items-center gap-1 bg-gray-50/80 backdrop-blur-sm border border-gray-200 rounded-md py-0.5 px-1 text-xs">
+              <span className="">{flag}</span>
+              {country}
+            </p>
+          </div>
+          <div className="flex items-center text-gray-800 text-xs">
+            <Clock className="h-4 w-4 mr-1" />
+            <span>{abbreviation}</span>
+          </div>
         </div>
-        <div className="flex items-center text-gray-400 text-xs">
-          <Clock className="h-4 w-4 mr-1" />
-          <span>{abbreviation}</span>
-        </div>
-      </div>
 
-      <div className="mt-4 flex flex-col items-center">
-        <div className="w-32 h-32 mb-4">
-          <AnalogClock
-            value={new Date(currentTime.toLocaleString('en-US', { timeZone: timezone }))}
-            size={128}
-            renderNumbers={true}
-            renderMinuteMarks={true}
-            renderHourMarks={true}
-          />
+        <div className="mt-4 flex flex-col items-center">
+          <div className="w-32 h-32 mb-4">
+            <AnalogClock
+              value={new Date(currentTime.toLocaleString('en-US', { timeZone: timezone }))}
+              size={128}
+              renderNumbers={true}
+              renderMinuteMarks={true}
+              renderHourMarks={true}
+            />
+          </div>
+          <p className="text-gray-800 text-sm mt-2 font-medium">{localDate}</p>
         </div>
-        <p className="text-gray-500 text-sm mt-2">{localDate}</p>
       </div>
     </div>
   )
