@@ -22,15 +22,14 @@ import { CSS } from '@dnd-kit/utilities'
 const defaultCities = [
   { name: "Vancouver", country: "Canada", timezone: "America/Vancouver", abbreviation: "PDT", flag: "🇨🇦" },
   { name: "Ottawa", country: "Canada", timezone: "America/Toronto", abbreviation: "EDT", flag: "🇨🇦" },
-  { name: "Beijing", country: "China", timezone: "Asia/Shanghai", abbreviation: "CST", flag: "🇨🇳" },
-  { name: "Tokyo", country: "Japan", timezone: "Asia/Tokyo", abbreviation: "JST", flag: "🇯🇵" },
-  { name: "Taipei", country: "Taiwan", timezone: "Asia/Taipei", abbreviation: "CST", flag: "🇹🇼" },
-  { name: "Seoul", country: "South Korea", timezone: "Asia/Seoul", abbreviation: "KST", flag: "🇰🇷" },
   { name: "Bangkok", country: "Thailand", timezone: "Asia/Bangkok", abbreviation: "ICT", flag: "🇹🇭" },
-  { name: "Jakarta", country: "Indonesia", timezone: "Asia/Jakarta", abbreviation: "WIB", flag: "🇮🇩" },
-  { name: "Manila", country: "Philippines", timezone: "Asia/Manila", abbreviation: "PHT", flag: "🇵🇭" },
   { name: "Ho Chi Minh City", country: "Vietnam", timezone: "Asia/Ho_Chi_Minh", abbreviation: "ICT", flag: "🇻🇳" },
   { name: "Kuala Lumpur", country: "Malaysia", timezone: "Asia/Kuala_Lumpur", abbreviation: "MYT", flag: "🇲🇾" },
+  { name: "Jakarta", country: "Indonesia", timezone: "Asia/Jakarta", abbreviation: "WIB", flag: "🇮🇩" },
+  { name: "Manila", country: "Philippines", timezone: "Asia/Manila", abbreviation: "PHT", flag: "🇵🇭" },
+  { name: "Taipei", country: "Taiwan", timezone: "Asia/Taipei", abbreviation: "CST", flag: "🇹🇼" },
+  { name: "Tokyo", country: "Japan", timezone: "Asia/Tokyo", abbreviation: "JST", flag: "🇯🇵" },
+  { name: "Seoul", country: "South Korea", timezone: "Asia/Seoul", abbreviation: "KST", flag: "🇰🇷" },
 ]
 
 export default function WorldTimePage() {
@@ -84,11 +83,11 @@ export default function WorldTimePage() {
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
       <header className="pt-8">
-        <div className="container mx-auto px-8">
+        <div className="max-w-prose mx-auto px-8">
           <div className="flex items-center justify-center gap-10">
-            <h1 className="text-4xl font-bold text-gray-900">My Time</h1>
+            <h1 className="text-2xl font-bold text-gray-900">Currently</h1>
             <div className="text-right">
-              <p className="text-2xl text-gray-600">
+              <p className="text-lg text-gray-600">
                 {new Intl.DateTimeFormat("en-US", {
                   hour: "numeric",
                   minute: "numeric",
@@ -96,7 +95,7 @@ export default function WorldTimePage() {
                   timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
                 }).format(currentTime)}
               </p>
-              <p className="text-gray-500 mt-1">
+              <p className="text-gray-500 mt-1 text-sm">
                 {new Intl.DateTimeFormat("en-US", {
                   weekday: "long",
                   year: "numeric",
@@ -110,7 +109,7 @@ export default function WorldTimePage() {
         </div>
       </header>
 
-      <main className="container mx-auto px-8 pt-8 pb-12">
+      <main className="mx-auto max-w-6xl px-8 pt-8 pb-12">
         <DndContext
           sensors={sensors}
           collisionDetection={closestCenter}
@@ -172,25 +171,25 @@ function SortableCityTimeCard({ city, country, timezone, abbreviation, currentTi
       style={style}
       {...attributes}
       {...listeners}
-      className="bg-white rounded-lg shadow-sm border border-gray-100 p-6 transition-all hover:shadow-md cursor-move"
+      className="bg-white rounded-md shadow-sm border border-gray-100 p-6 transition-all hover:shadow-md cursor-move"
     >
       <div className="flex justify-between items-start mb-4">
         <div>
-          <h2 className="text-xl font-semibold text-gray-900">{city}</h2>
-          <p className="text-gray-500 flex items-center gap-1">
-            <span className="text-xl">{flag}</span>
+          <h2 className="font-semibold text-gray-900">{city}</h2>
+          <p className="text-gray-500 flex items-center gap-1 bg-gray-50 border border-gray-200 rounded-md py-0.5 px-1 text-xs">
+            <span className="">{flag}</span>
             {country}
           </p>
         </div>
-        <div className="flex items-center text-gray-400 text-sm">
+        <div className="flex items-center text-gray-400 text-xs">
           <Clock className="h-4 w-4 mr-1" />
           <span>{abbreviation}</span>
         </div>
       </div>
 
       <div className="mt-4">
-        <p className="text-3xl font-light text-gray-800">{localTime}</p>
-        <p className="text-gray-500 mt-2">{localDate}</p>
+        <p className="text-2xl text-gray-800">{localTime}</p>
+        <p className="text-gray-500 text-sm mt-2">{localDate}</p>
       </div>
     </div>
   )
