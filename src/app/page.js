@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react"
 import { Clock } from "lucide-react"
+import AnalogClock from 'react-clock'
+import 'react-clock/dist/Clock.css'
 import {
   DndContext,
   closestCenter,
@@ -86,24 +88,35 @@ export default function WorldTimePage() {
         <div className="max-w-prose mx-auto px-8">
           <div className="flex items-center justify-center gap-10">
             <h1 className="text-2xl font-bold text-gray-900">Currently</h1>
-            <div className="text-right">
-              <p className="text-lg text-gray-600">
-                {new Intl.DateTimeFormat("en-US", {
-                  hour: "numeric",
-                  minute: "numeric",
-                  hour12: true,
-                  timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
-                }).format(currentTime)}
-              </p>
-              <p className="text-gray-500 mt-1 text-sm">
-                {new Intl.DateTimeFormat("en-US", {
-                  weekday: "long",
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                  timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
-                }).format(currentTime)}
-              </p>
+            <div className="flex items-center gap-6">
+              <div className="w-24 h-24">
+                <AnalogClock
+                  value={currentTime}
+                  size={96}
+                  renderNumbers={true}
+                  renderMinuteMarks={true}
+                  renderHourMarks={true}
+                />
+              </div>
+              <div className="text-right">
+                <p className="text-lg text-gray-600">
+                  {new Intl.DateTimeFormat("en-US", {
+                    hour: "numeric",
+                    minute: "numeric",
+                    hour12: true,
+                    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+                  }).format(currentTime)}
+                </p>
+                <p className="text-gray-500 mt-1 text-sm">
+                  {new Intl.DateTimeFormat("en-US", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+                  }).format(currentTime)}
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -187,8 +200,16 @@ function SortableCityTimeCard({ city, country, timezone, abbreviation, currentTi
         </div>
       </div>
 
-      <div className="mt-4">
-        <p className="text-2xl text-gray-800">{localTime}</p>
+      <div className="mt-4 flex flex-col items-center">
+        <div className="w-32 h-32 mb-4">
+          <AnalogClock
+            value={new Date(currentTime.toLocaleString('en-US', { timeZone: timezone }))}
+            size={128}
+            renderNumbers={true}
+            renderMinuteMarks={true}
+            renderHourMarks={true}
+          />
+        </div>
         <p className="text-gray-500 text-sm mt-2">{localDate}</p>
       </div>
     </div>
