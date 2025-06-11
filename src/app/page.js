@@ -1,5 +1,4 @@
 "use client"
-
 import { useState, useEffect } from "react"
 import { Clock } from "lucide-react"
 import AnalogClock from 'react-clock'
@@ -98,8 +97,9 @@ export default function WorldTimePage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#f8f9fa]">
-      <header className="pt-8 sticky top-0 z-50 bg-white">
+    <div className="min-h-screen bg-white">
+      {/* MY LOCAL TIME */}
+      <header className="sticky top-0 z-50 bg-white pt-4">
         <div className="mx-auto">
           <div className="flex justify-center items-center gap-3">
             <div className="w-32 h-32">
@@ -221,17 +221,13 @@ function SortableCityTimeCard({ city, country, timezone, abbreviation, currentTi
           </div>
         </div>
 
-        <div className="mt-4 flex flex-col items-center">
-          <div className="w-32 h-32 mb-4">
-            <AnalogClock
-              value={new Date(currentTime.toLocaleString('en-US', { timeZone: timezone }))}
-              size={128}
-              renderNumbers={true}
-              renderMinuteMarks={true}
-              renderHourMarks={true}
-            />
+        <div className="mt-6 flex flex-col items-center">
+          <div className="text-center">
+            <p className="text-4xl font-bold text-gray-900 mb-2 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg border">
+              {localTime}
+            </p>
           </div>
-          <p className="text-gray-800 text-sm mt-2 font-medium">{localDate}</p>
+          <p className="text-gray-800 text-sm mt-2 font-medium bg-gray-50/80 backdrop-blur-sm px-3 py-1 rounded-md border border-gray-200">{localDate}</p>
         </div>
       </div>
     </div>

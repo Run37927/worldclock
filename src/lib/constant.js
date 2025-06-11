@@ -1,5 +1,6 @@
 export const defaultCities = [
   { name: "Vancouver", country: "Canada", timezone: "America/Vancouver", abbreviation: "PDT", flag: "🇨🇦", image: "/vancouver.png" },
+  { name: "Toronto", country: "Canada", timezone: "America/Toronto", abbreviation: "EDT", flag: "🇨🇦", image: "/toronto.png" },
   { name: "Ottawa", country: "Canada", timezone: "America/Toronto", abbreviation: "EDT", flag: "🇨🇦", image: "/ottawa.png" },
   { name: "Bangkok", country: "Thailand", timezone: "Asia/Bangkok", abbreviation: "ICT", flag: "🇹🇭", image: "/bkk.png" },
   { name: "Ho Chi Minh City", country: "Vietnam", timezone: "Asia/Ho_Chi_Minh", abbreviation: "ICT", flag: "🇻🇳", image: "/hcmc.png" },
